@@ -2,6 +2,7 @@
 
 import cmd
 
+
 class HBNBCommand(cmd.Cmd):
     """Enty class for the cmd"""
     prompt = "(hbnb)"
@@ -10,20 +11,14 @@ class HBNBCommand(cmd.Cmd):
         """an empty line + ENTER shouldn't execute anything """
         pass
 
-    def do_greet(self, line):
-        """Greet user"""
-        if line:
-            print("hello", line)
-        else:
-            print("hello")
-
     def do_EOF(self, line):
-        """EOF command to exit the program."""
+        """Signal to exit the programm"""
         return True
-        
+
     def do_quit(self, line):
-        """Quit command to exit the program."""
+        """Quit command to exit the program"""
         return True
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
