@@ -3,6 +3,7 @@
 import cmd
 
 class HBNBCommand(cmd.Cmd):
+    """Enty class for the cmd"""
     prompt = "(hbnb)"
 
     def emptyline(self):
