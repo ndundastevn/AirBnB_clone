@@ -3,7 +3,12 @@
 
 import json
 from models.base_model import BaseModel
-
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 class FileStorage():
     """serializes instances to a JSON file &
@@ -37,3 +42,15 @@ class FileStorage():
                     self.new(eval(obj["__class__"])(**obj))
         except FileNotFoundError:
             return
+
+    def classes(self):
+        """returns a dict of classes & their values"""
+        classes = {"BaseModel": BaseModel,
+                   "User": User,
+                   "State": State,
+                   "City": City,
+                   "Amenity": Amenity,
+                   "Place": Place,
+                   "Review": Review}
+        return classes
+    
