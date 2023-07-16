@@ -58,11 +58,11 @@ class TestBaseModel(unittest.TestCase):
     def test_3_attributes(self):
         """Tests attributes value for instance of a BaseModel class."""
 
-        attributes = storage.attributes()["BaseModel"]
+        attributes = storage.classes()["BaseModel"].__dict__
         o = BaseModel()
         for k, v in attributes.items():
             self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
+            self.assertEqual(str(type(getattr(o, k, None)), v)
 
     def test_3_datetime_created(self):
         """Tests if updated_at & created_at are current at creation."""
