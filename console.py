@@ -123,6 +123,7 @@ class HBNBCommand(cmd.Cmd):
                             attr_type = type(getattr(instance, attr_name))
                             setattr(instance, attr_name, attr_type(attr_value))
                             instance.save()
+                            storage.save()
                 else:
                     print("** no instance found **")
 
