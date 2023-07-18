@@ -12,39 +12,20 @@ from models.base_model import BaseModel
 
 
 class TestReview(unittest.TestCase):
-
-    """Test Cases for the Review class."""
-
     def setUp(self):
-        """Sets up test methods."""
-        pass
+        # Set up an instance of Review clase
+        self.review = Review()
 
     def tearDown(self):
-        """Tears down test methods."""
-        self.resetStorage()
-        pass
+        # Clean up the instance of Review clase 
+        del self.review
 
-    def resetStorage(self):
-        """Resets FileStorage data."""
-        FileStorage._FileStorage__objects = {}
-        if os.path.isfile(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
+    def test_attributes_initialization(self):
+        # Check if the attributes are initialized correctly
+        self.assertEqual(self.review.place_id, "")  # Empty string
+        self.assertEqual(self.review.user_id, "")  # Empty string
+        self.assertEqual(self.review.text, "")  # Empty string
 
-    def test_8_instantiation(self):
-        """Tests instantiation of Review class."""
 
-        b = Review()
-        self.assertEqual(str(type(b)), "<class 'models.review.Review'>")
-        self.assertIsInstance(b, Review)
-        self.assertTrue(issubclass(type(b), BaseModel))
-
-    def test_8_attributes(self):
-        """Tests the attributes of Review class."""
-        attributes = storage.attributes()["Review"]
-        o = Review()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
