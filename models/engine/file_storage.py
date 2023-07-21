@@ -10,6 +10,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class FileStorage():
     """serializes instances to a JSON file &
     deserializes JSON file to instances"""
@@ -53,4 +54,3 @@ class FileStorage():
                    "Place": Place,
                    "Review": Review}
         return classes
-    
