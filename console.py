@@ -25,6 +25,7 @@ CLASSES = [
     "Review"
 ]
 
+
 def parse(arg):
     curly_braces = re.search(r"\{(.*?)\}", arg)
     brackets = re.search(r"\[(.*?)\]", arg)
@@ -42,6 +43,7 @@ def parse(arg):
         retl.append(curly_braces.group())
         return retl
 
+
 def check_args(args):
     """checks if args is valid"""
     arg_list = parse(args)
@@ -52,7 +54,6 @@ def check_args(args):
         print("** class doesn't exist **")
     else:
         return arg_list
-
 
 
 class HBNBCommand(cmd.Cmd):
@@ -161,7 +162,6 @@ class HBNBCommand(cmd.Cmd):
                     print("** no instance found **")
 
             storage.save()
-
 
 
 if __name__ == '__main__':
