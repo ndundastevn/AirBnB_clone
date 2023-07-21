@@ -10,41 +10,35 @@ import os
 from models import storage
 from models.base_model import BaseModel
 
-
 class TestAmenity(unittest.TestCase):
+    def test_inheritance(self):
+        """Test inherits from BaseModel"""
+        self.assertTrue(issubclass(Amenity, BaseModel))
 
-    """Test Cases for the Amenity class."""
+    def test_attributes(self):
+        """Test attributes of Amenity class"""
+        amenity = Amenity()
 
-    def setUp(self):
-        """Sets up test methods."""
-        pass
+        # Test if name attribute exists
+        self.assertTrue(hasattr(amenity, 'name'))
 
-    def tearDown(self):
-        """Tears down test methods."""
-        self.resetStorage()
-        pass
+        # Test if name attribute is an empty string
+        self.assertEqual(amenity.name, "")
 
-    def resetStorage(self):
-        """Resets FileStorage data."""
-        FileStorage._FileStorage__objects = {}
-        if os.path.isfile(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
+    def test_str_representation(self):
+        """Test string representation of Amenity object"""
+        amenity = Amenity()
+        expected_str = f"[Amenity] ({amenity.id}) {amenity.__dict__}"
+        self.assertEqual(str(amenity), expected_str)
 
-    def test_8_instantiation(self):
-        """Tests instantiation of Amenity class."""
+    def test_save_method(self):
+        """Test save method of Amenity"""
+        amenity = Amenity()
+        old_updated_at = amenity.updated_at
 
-        b = Amenity()
-        self.assertEqual(str(type(b)), "<class 'models.amenity.Amenity'>")
-        self.assertIsInstance(b, Amenity)
-        self.assertTrue(issubclass(type(b), BaseModel))
+        amenity.save()
 
-    def test_8_attributes(self):
-        """Tests the attributes of Amenity class."""
-        attributes = storage.attributes()["Amenity"]
-        o = Amenity()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
+        self.assertNotEqual(amenity.updated_at, old_updated_at)
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()

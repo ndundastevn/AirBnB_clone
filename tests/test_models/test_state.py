@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Unittest module for the State Class."""
+"""Unittest for state class"""
 
 import unittest
 from datetime import datetime
@@ -13,39 +13,37 @@ from models.base_model import BaseModel
 
 
 class TestState(unittest.TestCase):
-
-    """Test Cases for the State class."""
+    """TestState clase for the State class."""
 
     def setUp(self):
-        """Sets up test methods."""
+        """Sets up tests"""
         pass
 
     def tearDown(self):
-        """Tears down test methods."""
+        """Tears down test methods of teststate class."""
         self.resetStorage()
         pass
 
     def resetStorage(self):
-        """Resets FileStorage data."""
+        """Resets FileStorage"""
         FileStorage._FileStorage__objects = {}
         if os.path.isfile(FileStorage._FileStorage__file_path):
             os.remove(FileStorage._FileStorage__file_path)
 
-    def test_8_instantiation(self):
-        """Tests instantiation of State class."""
-
-        b = State()
-        self.assertEqual(str(type(b)), "<class 'models.state.State'>")
-        self.assertIsInstance(b, State)
-        self.assertTrue(issubclass(type(b), BaseModel))
+    def test_instantiation(self):
+        """Tests instantiation"""
+        bb = State()
+        self.assertEqual(str(type(bb)), "<class 'models.state.State'>")
+        self.assertIsInstance(bb, State)
+        self.assertTrue(issubclass(type(bb), BaseModel))
 
     def test_8_attributes(self):
-        """Tests the attributes of State class."""
+        """Tests the attributes of"""
         attributes = storage.attributes()["State"]
-        o = State()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
+        oo = State()
+        for kk, vv in attributes.items():
+            self.assertTrue(hasattr(oo, kk))
+            self.assertEqual(type(getattr(oo, kk, None)), vv)
 
 if __name__ == "__main__":
     unittest.main()

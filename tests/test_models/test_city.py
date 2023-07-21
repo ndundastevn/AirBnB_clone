@@ -13,39 +13,40 @@ from models.base_model import BaseModel
 
 
 class TestCity(unittest.TestCase):
+    def test_inheritance(self):
+        """Test if City class inherits from parent class BaseModel"""
+        self.assertTrue(issubclass(City, BaseModel))
 
-    """Test Cases for the City class."""
+    def test_attributes(self):
+        """Test attributes of City class"""
+        city = City()
 
-    def setUp(self):
-        """Sets up test methods."""
-        pass
+        # Test if state_id attribute exists
+        self.assertTrue(hasattr(city, 'state_id'))
 
-    def tearDown(self):
-        """Tears down test methods."""
-        self.resetStorage()
-        pass
+        # Test if name attribute exists
+        self.assertTrue(hasattr(city, 'name'))
 
-    def resetStorage(self):
-        """Resets FileStorage data."""
-        FileStorage._FileStorage__objects = {}
-        if os.path.isfile(FileStorage._FileStorage__file_path):
-            os.remove(FileStorage._FileStorage__file_path)
+        # Test if state_id attribute is an empty string
+        self.assertEqual(city.state_id, "")
 
-    def test_8_instantiation(self):
-        """Tests instantiation of City class."""
+        # Test if name attribute is an empty string
+        self.assertEqual(city.name, "")
 
-        b = City()
-        self.assertEqual(str(type(b)), "<class 'models.city.City'>")
-        self.assertIsInstance(b, City)
-        self.assertTrue(issubclass(type(b), BaseModel))
+    def test_str_representation(self):
+        """Test string representation of City object"""
+        city = City()
+        expected_str = f"[City] ({city.id}) {city.__dict__}"
+        self.assertEqual(str(city), expected_str)
 
-    def test_8_attributes(self):
-        """Tests the attributes of City class."""
-        attributes = storage.attributes()["City"]
-        o = City()
-        for k, v in attributes.items():
-            self.assertTrue(hasattr(o, k))
-            self.assertEqual(type(getattr(o, k, None)), v)
+    def test_save_method(self):
+        """Test save method of City"""
+        city = City()
+        old_updated_at = city.updated_at
 
-if __name__ == "__main__":
+        city.save()
+
+        self.assertNotEqual(city.updated_at, old_updated_at)
+
+if __name__ == '__main__':
     unittest.main()

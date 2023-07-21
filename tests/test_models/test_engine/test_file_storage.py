@@ -1,7 +1,5 @@
 #!/usr/bin/python3
-"""
-Test for storage
-"""
+""" Test json file storage """
 from datetime import datetime
 import unittest
 from time import sleep
@@ -10,9 +8,9 @@ from models.engine.file_storage import FileStorage
 
 
 class test_fileStorage(unittest.TestCase):
-    """Test FileStorage Class"""
+    """Test FileStorage """
     def test_instances(self):
-        """chequeamos instantation"""
+        """test instantation"""
         obj = FileStorage()
         self.assertIsInstance(obj, FileStorage)
 
