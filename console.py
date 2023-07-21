@@ -95,36 +95,31 @@ class HBNBCommand(cmd.Cmd):
                 print([str(instance) for instance in insts.values()
                       if type(instance).__name__ == class_name])
 
-    def do_update(self, arg):
+    def do_update(self, args):
         """Updates instances."""
-        args = arg.split()
-        if not args:
+        args = args.split()
+        if len(args) == 0:
             print("** class name missing **")
-        else:
-            class_name = args[0]
-            if class_name not in storage.classes():
-                print("** class doesn't exist **")
-            elif len(args) < 2:
-                print("** instance id missing **")
-            else:
-                instances = storage.all()
-                instance_id = args[1]
-                key = class_name + '.' + instance_id
-                if key in instances:
-                    instance = instances[key]
-                    if len(args) < 3:
-                        print("** attribute name missing **")
-                    elif len(args) < 4:
-                        print("** value missing **")
+            return False
+        if args[0] in classes:
+            if len(args) > 1:
+                key = args[0] + '.' + args[1]
+                if key in storage.all():
+                    if len(args) > 2:
+                        if len(args) > 3:
+                            setattr(storage.all()[key], args[2], args[3])
+                            storage.all()[key].save()
+                        else:
+                            print("** value missing **")
                     else:
-                        attr_name = args[2]
-                        attr_value = args[3]
-                        if hasattr(instance, attr_name):
-                            attr_type = type(getattr(instance, attr_name))
-                            setattr(instance, attr_name, attr_type(attr_value))
-                            storage.save()
+                        print("** attribute name missing **")
                 else:
                     print("** no instance found **")
+            else:
+                print("** instance id missing **")
+        else:
+            print("** class doesn't exist **")
+
 
 
 if __name__ == '__main__':
